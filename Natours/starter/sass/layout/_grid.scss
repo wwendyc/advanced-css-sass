@@ -1,6 +1,6 @@
 .row {
   max-width: $grid-width;
-  background-color: #eee;
+  // background-color: #eee;
   margin: 0 auto; // centers row by keeping left & right margin the same
 
   // equal to .row:not()
@@ -12,7 +12,7 @@
 
   [class^="col-"] { // selects all the classes that begins with "col-"
     // other options: * and $
-    background-color: orangered;
+    // background-color: orangered;
     float: left;
 
     &:not(:last-child) {
