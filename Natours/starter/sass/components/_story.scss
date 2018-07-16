@@ -1,0 +1,70 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-white, .6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem; // to compensate for the 3rem __shape transform
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  // usually we can use direct child selector to unskew elements inside .story container
+  // but only 1 transform property can be applied for the element
+  // so since the __img already has one, it didn't work on it
+  // & > * {
+  //   transform: skewX(12deg);
+  // }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    background-color: orangered;
+    float: left;
+    // shape outside specifies how the content flows around the element
+    // must have defined dimensions (width/height) and float properties to work
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+
+    transform: translateX(-3rem) skewX(12deg); // use transform to create margin/padding around elements that are fluid
+    position: relative;
+  }
+
+  &__img {
+    // responsive sites always need img dimensions defined
+    height: 100%;
+    transform: translate(-4rem) scale(1.4);
+    transition: all 0.5s;
+    backface-visibility: hidden; // fixed weird shape when img hover was added
+  }
+
+  &__text {
+    transform: skewX(12deg);
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden; // fixed text wobbling on hover
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__img {
+    transform: translate(-4rem) scale(1);
+    filter: blur(3px) brightness(80%);
+  }
+}
